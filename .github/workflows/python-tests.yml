@@ -1,10 +1,7 @@
-name: RF Pytest Automation
+name: RF Pytest Automation CI
 
 on:
   push:
-    branches: [ main ]
-
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -15,18 +12,17 @@ jobs:
 
     steps:
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Setup Python
+    - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
 
     - name: Install dependencies
       run: |
-        pip install pytest selenium pyvisa pyyaml
+        pip install -r requirements.txt
 
-    - name: Run pytest
+    - name: Run tests
       run: |
         pytest -v
